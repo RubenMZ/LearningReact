@@ -1,2 +1,2 @@
 # LearningReact
-Rails &amp; React WebApp
+Calendar using Rails &amp; React
