@@ -53,6 +53,8 @@ group :test do
   gem 'rspec-rails', '~> 4.0.1'
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that.
   gem 'shoulda-matchers'
+  # Rubocop rspec
+  gem 'rubocop-rspec', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
