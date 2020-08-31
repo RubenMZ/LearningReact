@@ -41,11 +41,11 @@ $ sudo apt-get install libpq-dev
 3. Create database from postgres (default user).
 
 ```bash
-$ sudo -u postgres createuser calendar_api
-$ sudo -u postgres createdb -O calendar_api api_development
-$ sudo -u postgres createdb -O calendar_api api_test
+$ sudo -u postgres createuser learning_react_calendar
+$ sudo -u postgres createdb -O learning_react_calendar learning_react_calendar_development
+$ sudo -u postgres createdb -O learning_react_calendar learning_react_calendar_test
 $ sudo -i -u postgres
-$ psql
+$ psql postgres
 # ALTER USER calendar_api WITH SUPERUSER;
 $ sudo service postgresql restart
 ```

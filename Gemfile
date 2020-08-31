@@ -22,6 +22,10 @@ gem 'puma', '~> 4.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated
+# paginator for Rails 4+
+gem 'kaminari'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
@@ -55,6 +59,9 @@ group :test do
   gem 'shoulda-matchers'
   # Rubocop rspec
   gem 'rubocop-rspec', require: false
+  # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage
+  # across test suites
+  gem 'simplecov'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

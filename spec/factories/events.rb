@@ -12,5 +12,9 @@
 #
 FactoryBot.define do
   factory :event do
+    title { Faker::Lorem.word }
+    description { Faker::Lorem.sentence }
+    start_date { Time.zone.today }
+    end_date { Time.zone.tomorrow }
   end
 end
