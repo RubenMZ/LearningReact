@@ -2,17 +2,32 @@ RSpec.describe EventsController, type: :controller do
   describe 'GET #index' do
     let(:events) { create_list :event, rand(2..3) }
 
-    before do
-      events
-      get :index
+    context 'when valid request' do
+      before do
+        events
+        get :index
+      end
+
+      it 'should return HTTP 200 OK' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'should return resource' do
+        expect(data.size).to eq(events.count)
+      end
     end
 
-    it 'should return HTTP 200 OK' do
-      expect(response).to have_http_status(:ok)
-    end
+    describe 'pagination' do
+      let(:events) { create_list :event, 5 }
 
-    it 'should return resource' do
-      expect(data.size).to eq(events.count)
+      before do
+        events
+        get :index, params: {page: {size: '2', number: '0'}}
+      end
+
+      it 'should return paged resources' do
+        expect(data.size).to eq 2
+      end
     end
   end
 
