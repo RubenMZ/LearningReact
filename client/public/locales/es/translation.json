@@ -1,8 +1,22 @@
 {
+  "general": {
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
   "calendar": {
     "title": "Calendario"
   },
   "events": {
-    "new": "Nuevo evento"
+    "add": "Añadir evento",
+    "modal": {
+      "new": "Nuevo evento",
+      "edit": "Editar evento"
+    },
+    "form": {
+      "title": "Título",
+      "description": "Descripción",
+      "startDate": "Fecha desde",
+      "endDate": "Fecha hasta"
+    }
   }
 }

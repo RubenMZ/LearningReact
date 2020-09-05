@@ -5,7 +5,7 @@ import awaitToData from '../utils/await-to-data.js'
 export default {
   getBaseResource(urlSegment = '') {
     const BASE_RESOURCE = 'events'
-    return BASE_RESOURCE + urlSegment
+    return BASE_RESOURCE + `/${urlSegment}`
   },
 
   index(params = {}) {

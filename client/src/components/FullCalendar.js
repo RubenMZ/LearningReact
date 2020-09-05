@@ -8,28 +8,27 @@ export default class FullCalendarComponent extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      events: [
-        { title: 'event 1', date: '2020-09-01' },
-        { title: 'event 2', date: '2020-09-02' }
-      ] // props.events
-    };
+    // [{ title: 'event 1', date: '2020-09-01', start: ..., end: ...}]
+    this.state = {events: props.events}
+    this.handleEventClick = this.handleEventClick.bind(this)
+  }
+
+  handleEventClick(arg) {
+    this.props.onEventClick(arg.event.id)
   }
 
   render() {
     return (
       <FullCalendar
+        timeZone='UTC'
         plugins={[ dayGridPlugin, interactionPlugin ]}
         initialView="dayGridMonth"
-        dateClick={this.handleDateClick}
+        eventClick={this.handleEventClick}
         selectable='true'
+        editable='true'
         eventContent={Event}
         events={this.state.events}
       />
     )
-  }
-  handleDateClick = (arg) => { // bind with an arrow function
-    alert(arg.dateStr)
-    console.log(arg)
   }
 }
