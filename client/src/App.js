@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter as Router } from "react-router-dom"
 
 import DefaultLayout from './layouts/DefaultLayout.js'
 import Calendar from './pages/Calendar.js'

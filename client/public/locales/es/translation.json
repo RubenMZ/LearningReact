@@ -1,7 +1,13 @@
 {
   "general": {
     "save": "Guardar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar"
+  },
+  "errors": {
+    "blank": "Es requerido",
+    "invalid": "Es inválido"
   },
   "calendar": {
     "title": "Calendario"

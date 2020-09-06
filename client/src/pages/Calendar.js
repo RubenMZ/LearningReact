@@ -10,10 +10,10 @@ import Loading from '../components/Loading.js'
 import EventsService from '../services/api/events.js'
 
 function CalendarHeader(props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <div class="btn-toolbar justify-content-between m-3" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-toolbar justify-content-between p-3" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
         <Link to="/" class="btn btn-light">{t('calendar.title')}</Link>
       </div>
@@ -24,24 +24,24 @@ function CalendarHeader(props) {
   );
 }
 
-async function getEvents() {
-  const {data: {data}} = await EventsService.index()
-  return data
-}
-
 class Calendar extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       events: [],
       selectedEvent: null,
-      showEventModal: false
+      showEventModal: false,
+      isReady: false
     }
 
     this.openEventModal = this.openEventModal.bind(this)
     this.closeEventModal = this.closeEventModal.bind(this)
     this.showEvent = this.showEvent.bind(this)
-    getEvents().then(events => this.setState({events}))
+    this.handleSuccess = this.handleSuccess.bind(this)
+  }
+
+  componentDidMount() {
+    this.getEvents()
   }
 
   get calendarEvents() {
@@ -50,6 +50,12 @@ class Calendar extends Component {
 
   get readOnlyModal() {
     return !!this.state.selectedEvent
+  }
+
+  async getEvents() {
+    this.setState({isReady: false})
+    const {data: {data}} = await EventsService.index()
+    this.setState({events: data, isReady: true})
   }
 
   buildEvent(event) {
@@ -85,13 +91,25 @@ class Calendar extends Component {
     this.setState({showEventModal: false})
   }
 
+  handleSuccess() {
+    this.closeEventModal()
+    this.getEvents()
+  }
+
   render() {
-    const {selectedEvent, showEventModal} = this.state
+    const {selectedEvent, showEventModal, isReady} = this.state
     return (
       <Router>
         <CalendarHeader onAddClick={this.openEventModal}/>
-        {this.calendarEvents.length > 0 ? <FullCalendar events={this.calendarEvents} onEventClick={this.showEvent}/> : <Loading/>}
-        {showEventModal ? <EventModal data={selectedEvent} readOnly={this.readOnlyModal} close={this.closeEventModal}/> : null }
+        {isReady ? <FullCalendar events={this.calendarEvents} onEventClick={this.showEvent}/> : <Loading/>}
+        {showEventModal ?
+          <EventModal
+            data={selectedEvent}
+            readOnly={this.readOnlyModal}
+            onCancel={this.closeEventModal}
+            onSuccess={this.handleSuccess}
+          /> : null
+        }
       </Router>
     )
   }

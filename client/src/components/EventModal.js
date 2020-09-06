@@ -1,33 +1,38 @@
-import React, { Component, Suspense } from 'react';
-import { withTranslation } from 'react-i18next';
-import DatePicker from 'react-datepicker';
+import React, { Component, Suspense } from 'react'
+import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
+
+import EventModalFooter from './EventModalFooter.js'
+import DatePicker from 'react-datepicker'
+import InputField from './InputField.js'
 
 import EventsService from '../services/api/events.js'
 
-
-async function createEvent(attributes) {
-  const {data, errors} = await EventsService.create(attributes)
-  return {data, errors}
-}
-
-async function updateEvent(id, attributes) {
-  const {data, errors} = await EventsService.update(id, attributes)
-  return {data, errors}
+const defaultEvent = {
+  title: '',
+  start_date: null,
+  end_date: null,
+  description: ''
 }
 
 class EventModal extends Component {
   constructor(props) {
     super(props)
+    const {data, readOnly, onSuccess, onCancel} = props
 
     this.state = {
-      data: props.data || {},
+      data: data || defaultEvent,
       errors: {},
-      edit: !!props.data,
-      readOnly: props.readOnly || false
+      editMode: !!data,
+      readOnly: readOnly || false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editEvent = this.editEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
+    this.onSuccess = onSuccess
+    this.onCancel = onCancel
   }
 
   handleChange(event) {
@@ -44,16 +49,32 @@ class EventModal extends Component {
     this.setState({data: {...data, [name]: value}})
   }
 
-  handleSubmit() {
+  async submit() {
     const {data} = this.state
-
     if (data.id) {
-      updateEvent(data.id, data).then(() => this.props.onSuccess)
-                                .catch(errors => this.setErrors(errors))
+      return await EventsService.update(data.id, data)
     } else {
-      createEvent(data).then(() => this.props.onSuccess)
-                       .catch(errors => this.setErrors(errors))
+      return await EventsService.create(data)
     }
+  }
+
+  async handleSubmit() {
+    const response = await this.submit()
+    if(response.data) {
+      this.onSuccess()
+    } else {
+      this.setErrors(response.errors)
+    }
+  }
+
+  async deleteEvent() {
+    const {data} = this.state
+    await EventsService.destroy(data.id)
+    this.onSuccess()
+  }
+
+  editEvent() {
+    this.setState({readOnly: false})
   }
 
   setErrors(errors) {
@@ -62,7 +83,7 @@ class EventModal extends Component {
 
   render() {
     const { t } = this.props
-    const { data, readOnly, edit } = this.state
+    const { data, readOnly, editMode, errors } = this.state
 
     return (
       <div class="modal" style={{display: 'block'}}>
@@ -70,52 +91,76 @@ class EventModal extends Component {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">
-                { edit ? t('events.modal.edit') : t('events.modal.new')}
+                { editMode ? t('events.modal.edit') : t('events.modal.new')}
               </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.props.close}>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
             <form onSubmit={this.handleSubmit}>
-              <p>{t('events.form.title')}</p>
-              <input name="title" type="text" value={data.title} onChange={this.handleChange} readOnly={readOnly}/>
-              <p>{t('events.form.startDate')}</p>
-              <DatePicker
-                selected={data.start_date}
-                onChange={date => this.handleChangeDate('start_date', date)}
-                selectsStart
-                startDate={data.start_date}
-                endDate={data.end_date}
-                readOnly={readOnly}
-              />
-              <p>{t('events.form.endDate')}</p>
-              <DatePicker
-                selected={data.end_date}
-                onChange={date => this.handleChangeDate('end_date', date)}
-                selectsEnd
-                startDate={data.start_date}
-                endDate={data.end_date}
-                minDate={data.start_date}
-                readOnly={readOnly}
-              />
-              <p>{t('events.form.description')}</p>
-              <textarea name="description" value={data.description} onChange={this.handleChange} readOnly={readOnly}/>
+              <InputField label={t('events.form.title')} errors={errors.title}>
+                <input
+                  name="title"
+                  type="text"
+                  value={data.title}
+                  onChange={this.handleChange}
+                  disabled={readOnly}
+                />
+              </InputField>
+
+              <InputField label={t('events.form.startDate')} errors={errors.start_date}>
+                <DatePicker
+                  selected={data.start_date}
+                  onChange={date => this.handleChangeDate('start_date', date)}
+                  selectsStart
+                  startDate={data.start_date}
+                  endDate={data.end_date}
+                  disabled={readOnly}
+                />
+              </InputField>
+
+              <InputField label={t('events.form.endDate')} errors={errors.end_date}>
+                <DatePicker
+                  selected={data.end_date}
+                  onChange={date => this.handleChangeDate('end_date', date)}
+                  selectsEnd
+                  startDate={data.start_date}
+                  endDate={data.end_date}
+                  minDate={data.start_date}
+                  disabled={readOnly}
+                />
+              </InputField>
+
+              <InputField label={t('events.form.description')} errors={errors.description}>
+                <textarea
+                  name="description"
+                  value={data.description}
+                  onChange={this.handleChange}
+                  disabled={readOnly}
+                />
+              </InputField>
             </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={this.props.close}>
-                {t('general.cancel')}
-              </button>
-              <button type="button" class="btn btn-primary" onClick={this.handleSubmit}>
-                {t('general.save')}
-              </button>
-            </div>
+            <EventModalFooter
+              readOnly={readOnly}
+              onEdit={this.editEvent}
+              onDelete={this.deleteEvent}
+              onCancel={this.onCancel}
+              onSave={this.handleSubmit}
+            />
           </div>
         </div>
       </div>
     )
   }
+}
+
+EventModal.propTypes = {
+  data: PropTypes.object,
+  readOnly: PropTypes.bool,
+  onSuccess: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
 }
 
 const MyComponent = withTranslation()(EventModal)

@@ -19,16 +19,18 @@ export default class FullCalendarComponent extends React.Component {
 
   render() {
     return (
-      <FullCalendar
-        timeZone='UTC'
-        plugins={[ dayGridPlugin, interactionPlugin ]}
-        initialView="dayGridMonth"
-        eventClick={this.handleEventClick}
-        selectable='true'
-        editable='true'
-        eventContent={Event}
-        events={this.state.events}
-      />
+      <div class='p-3'>
+        <FullCalendar
+          timeZone='UTC'
+          plugins={[ dayGridPlugin, interactionPlugin ]}
+          initialView="dayGridMonth"
+          eventClick={this.handleEventClick}
+          selectable='true'
+          editable='true'
+          eventContent={Event}
+          events={this.state.events}
+        />
+      </div>
     )
   }
 }
