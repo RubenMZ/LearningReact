@@ -10,7 +10,7 @@ RSpec.describe 'Calendar > Events new', js: true do
     click_add_event
   end
 
-  it 'should create new event' do
+  it 'creates new event' do
     fill_event_form(attributes)
 
     click_save_event
@@ -25,7 +25,7 @@ RSpec.describe 'Calendar > Events new', js: true do
   context 'when has empty fields' do
     before { click_save_event }
 
-    it 'should show errors' do
+    it 'shows errors' do
       within event_modal_selector do
         expect_show_error text: 'Es requerido', count: 3
       end

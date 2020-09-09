@@ -29,5 +29,5 @@ jobs:
     - name: Checking eslint
       run: |
         cd client
-        npm install eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-vue eslint-config-nosolosoftware
-        ./node_modules/.bin/eslint --ignore-pattern "vendor" src/js/
+        npm install eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-vue
+        ./node_modules/.bin/eslint --ignore-pattern "vendor" src

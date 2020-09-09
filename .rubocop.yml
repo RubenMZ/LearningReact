@@ -11,6 +11,13 @@ Style/BlockComments:
   Exclude:
     - "**/spec/**/*.rb"
 
+RSpec/DescribeClass:
+  Exclude:
+    - "**/spec/features/**/*.rb"
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
 Layout/LineLength:
   Max: 100
 

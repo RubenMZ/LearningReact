@@ -60,7 +60,7 @@ group :test do
   # Testing framework
   gem 'rspec-rails', '~> 4.0.1'
   # RSpec is a fine unit-testing framework, but is also handy for acceptance and integration tests.
-  gem 'rspec-longrun'
+  gem 'rspec-longrun', require: false
   # Rubocop rspec
   gem 'rubocop-rspec', require: false
   # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that.

@@ -12,23 +12,23 @@ module EventsHelpers
   end
 
   def click_add_event
-    find("#add-event-button").click
+    find('#add-event-button').click
   end
 
   def click_cancel_event
-    find("#cancel-event-button").click
+    find('#cancel-event-button').click
   end
 
   def click_save_event
-    find("#save-event-button").click
+    find('#save-event-button').click
   end
 
   def click_delete_event
-    find("#delete-event-button").click
+    find('#delete-event-button').click
   end
 
   def click_edit_event
-    find("#edit-event-button").click
+    find('#edit-event-button').click
   end
 
   def click_show_event(event)
@@ -41,7 +41,7 @@ module EventsHelpers
 
   def fill_event_form(attributes)
     fill_in 'title', with: attributes[:title] if attributes.key?(:title)
-    fill_datepicker 'startDate', with: attributes[:start_date]  if attributes.key?(:start_date)
+    fill_datepicker 'startDate', with: attributes[:start_date] if attributes.key?(:start_date)
     fill_datepicker 'endDate', with: attributes[:end_date] if attributes.key?(:end_date)
     fill_in 'description', with: attributes[:description] if attributes.key?(:description)
   end

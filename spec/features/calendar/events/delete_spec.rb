@@ -12,7 +12,7 @@ RSpec.describe 'Calendar > Events delete', js: true do
   end
 
 
-  it 'should remove an event' do
+  it 'removes an event' do
     expect(page).to have_css event_selector(event)
 
     click_delete_event

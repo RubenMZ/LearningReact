@@ -93,9 +93,9 @@ class EventModal extends Component {
               <h5 class="modal-title">
                 { editMode ? t('events.modal.edit') : t('events.modal.new')}
               </h5>
-              <a type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
+              <button class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
                 <span aria-hidden="true">&times;</span>
-              </a>
+              </button>
             </div>
             <div class="modal-body">
             <form onSubmit={this.handleSubmit}>

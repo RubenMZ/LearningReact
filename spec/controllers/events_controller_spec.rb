@@ -8,11 +8,11 @@ RSpec.describe EventsController, type: :controller do
         get :index
       end
 
-      it 'should return HTTP 200 OK' do
+      it 'returns HTTP 200 OK' do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'should return resource' do
+      it 'returns resource' do
         expect(data.size).to eq(events.count)
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe EventsController, type: :controller do
         get :index, params: {page: {size: '2', number: '0'}}
       end
 
-      it 'should return paged resources' do
+      it 'returns paged resources' do
         expect(data.size).to eq 2
       end
     end
@@ -36,30 +36,30 @@ RSpec.describe EventsController, type: :controller do
 
     before { get :show, params: {id: event.id} }
 
-    it 'should return HTTP 200 OK' do
+    it 'returns HTTP 200 OK' do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'should return resource' do
+    it 'returns resource' do
       expect(data).to eq event.as_json.symbolize_keys
     end
   end
 
   describe 'POST #create' do
-    let(:attributes) { attributes_for :event  }
+    let(:attributes) { attributes_for :event }
 
     context 'with valid parameters' do
       before { post :create, params: {data: attributes} }
 
-      it 'should return HTTP 201 Created' do
+      it 'returns HTTP 201 Created' do
         expect(response).to have_http_status(:created)
       end
 
-      it 'should return resource' do
+      it 'returns resource' do
         expect(data).to eq Event.last.as_json.symbolize_keys
       end
 
-      it 'should create a resource' do
+      it 'create a resource' do
         expect(Event.count).to be 1
       end
     end
@@ -67,15 +67,15 @@ RSpec.describe EventsController, type: :controller do
     context 'with invalid parameters' do
       before { post :create, params: {data: attributes.merge(title: '')} }
 
-      it 'should return HTTP 422 Unprocessable entity' do
+      it 'returns HTTP 422 Unprocessable entity' do
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
-      it 'should return errors' do
-        expect(errors).to include(title: [{:error=>"blank"}])
+      it 'returns errors' do
+        expect(errors).to include(title: [{error: 'blank'}])
       end
 
-      it 'shouldn\'t create a resource' do
+      it 'doesn\'t create a resource' do
         expect(Event.count).to be_zero
       end
     end
@@ -88,33 +88,32 @@ RSpec.describe EventsController, type: :controller do
     context 'with valid parameters' do
       before { put :update, params: {id: event.id, data: attributes} }
 
-      it 'should return HTTP 200 Ok' do
+      it 'returns HTTP 200 Ok' do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'should return updated resource' do
+      it 'returns updated resource' do
         expect(data[:id]).to eq(event.id)
       end
 
-      it 'should update resource' do
+      it 'updates resource' do
         event.reload
         expect(data).to eq event.as_json.symbolize_keys
       end
     end
 
-
     context 'with invalid parameters' do
       before { put :update, params: {id: event.id, data: attributes.merge(title: '')} }
 
-      it 'should return HTTP 422 Unprocessable entity' do
+      it 'returns HTTP 422 Unprocessable entity' do
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
-      it 'should return errors' do
-        expect(errors).to include(title: [{:error=>"blank"}])
+      it 'returns errors' do
+        expect(errors).to include(title: [{error: 'blank'}])
       end
 
-      it 'shouldn\'t update a resource' do
+      it 'doesn\'t update a resource' do
         expect(event.reload.title).not_to be_empty
       end
     end
@@ -125,11 +124,11 @@ RSpec.describe EventsController, type: :controller do
 
     before { delete :destroy, params: {id: event.id} }
 
-    it 'should return HTTP 204 No content' do
+    it 'returns HTTP 204 No content' do
       expect(response).to have_http_status(:no_content)
     end
 
-    it 'should destroy resource' do
+    it 'destroys resource' do
       expect(Event.count).to be_zero
     end
   end

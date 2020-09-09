@@ -2,6 +2,7 @@ RSpec.configure do |config|
   break if config.files_to_run.select { |x| x.include?('features') }.empty?
 
   require 'capybara/rspec'
+  require 'rspec/longrun'
 
   include RSpec::Longrun::DSL
 
@@ -56,7 +57,7 @@ RSpec.configure do |config|
 
     path = File.expand_path(File.join('tmp/errors'))
     Dir.mkdir(path) unless Dir.exist?(path)
-    screenshot = "#{example.file_path.gsub(/[\.\/]/, '-')}-#{example.metadata[:line_number]}.png"
+    screenshot = "#{example.file_path.gsub(%r{[\.\/]}, '-')}-#{example.metadata[:line_number]}.png"
     page.save_screenshot File.join(path, screenshot)
   end
 end

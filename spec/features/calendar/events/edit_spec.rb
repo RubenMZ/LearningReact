@@ -13,7 +13,7 @@ RSpec.describe 'Calendar > Events edit', js: true do
     click_edit_event
   end
 
-  it 'should update an event' do
+  it 'updates an event' do
     fill_event_form(attributes)
 
     click_save_event
@@ -30,7 +30,7 @@ RSpec.describe 'Calendar > Events edit', js: true do
       click_save_event
     end
 
-    it 'should show errors' do
+    it 'shows errors' do
       within event_modal_selector do
         expect_show_error text: 'Es requerido', count: 1
       end
