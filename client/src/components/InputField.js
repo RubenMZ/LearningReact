@@ -15,7 +15,7 @@ function InputField({label, errors, children}) {
   return (
     <div class="form-group">
       <label htmlFor="input-field">{label}</label>
-      <div id="input-field">{children}</div>
+      <div class="input-field">{children}</div>
       <small class="form-text text-danger">{error ? t(`errors.${error}`) : ''}</small>
     </div>
   )

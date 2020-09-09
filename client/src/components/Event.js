@@ -1,11 +1,11 @@
 import React from 'react';
 
 function Event(eventInfo) {
-  // $('[data-toggle="popover"]').popover()
+  const {event, timeText} = eventInfo
   return (
-    <div>
-        <span class="fc-event-time">{eventInfo.timeText}</span>
-        <span class="fc-event-title fc-sticky">{eventInfo.event.title}</span>
+    <div class={`event-${event.id}`}>
+        <span class="fc-event-time">{timeText}</span>
+        <span class="fc-event-title fc-sticky">{event.title}</span>
     </div>
   )
 };

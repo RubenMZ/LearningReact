@@ -8,10 +8,10 @@ function DeleteEditButtons(props) {
   const { onDelete, onEdit } = props
   return (
     <>
-      <button type="button" class="btn btn-danger" data-dismiss="modal" onClick={onDelete}>
+      <button id="delete-event-button" class="btn btn-danger" onClick={onDelete}>
         {t('general.delete')}
       </button>
-      <button type="button" class="btn btn-outline-success" onClick={onEdit}>
+      <button id="edit-event-button" class="btn btn-outline-success" onClick={onEdit}>
         {t('general.edit')}
       </button>
     </>
@@ -23,10 +23,10 @@ function CancelSaveButtons(props) {
   const { onCancel, onSave } = props
   return (
     <>
-      <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" onClick={onCancel}>
+      <button id="cancel-event-button" class="btn btn-outline-secondary" onClick={onCancel}>
         {t('general.cancel')}
       </button>
-      <button type="button" class="btn btn-success" onClick={onSave}>
+      <button id="save-event-button" class="btn btn-success" onClick={onSave}>
         {t('general.save')}
       </button>
     </>

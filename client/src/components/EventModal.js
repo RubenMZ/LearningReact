@@ -86,16 +86,16 @@ class EventModal extends Component {
     const { data, readOnly, editMode, errors } = this.state
 
     return (
-      <div class="modal" style={{display: 'block'}}>
+      <div id="event-modal" class="modal" style={{display: 'block'}}>
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">
                 { editMode ? t('events.modal.edit') : t('events.modal.new')}
               </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
+              <a type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
                 <span aria-hidden="true">&times;</span>
-              </button>
+              </a>
             </div>
             <div class="modal-body">
             <form onSubmit={this.handleSubmit}>
@@ -111,6 +111,7 @@ class EventModal extends Component {
 
               <InputField label={t('events.form.startDate')} errors={errors.start_date}>
                 <DatePicker
+                  name="startDate"
                   selected={data.start_date}
                   onChange={date => this.handleChangeDate('start_date', date)}
                   selectsStart
@@ -122,6 +123,7 @@ class EventModal extends Component {
 
               <InputField label={t('events.form.endDate')} errors={errors.end_date}>
                 <DatePicker
+                  name="endDate"
                   selected={data.end_date}
                   onChange={date => this.handleChangeDate('end_date', date)}
                   selectsEnd

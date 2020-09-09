@@ -19,7 +19,7 @@ export default class FullCalendarComponent extends React.Component {
 
   render() {
     return (
-      <div class='p-3'>
+      <div class='calendar p-3'>
         <FullCalendar
           timeZone='UTC'
           plugins={[ dayGridPlugin, interactionPlugin ]}

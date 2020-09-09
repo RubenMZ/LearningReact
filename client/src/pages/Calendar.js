@@ -15,10 +15,14 @@ function CalendarHeader(props) {
   return (
     <div class="btn-toolbar justify-content-between p-3" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
-        <Link to="/" class="btn btn-light">{t('calendar.title')}</Link>
+        <Link to="/" class="btn btn-light">
+          {t('calendar.title')}
+        </Link>
       </div>
       <div class="input-group">
-        <button onClick={props.onAddClick} class="btn btn-success">{t('events.add')}</button>
+        <button id="add-event-button" onClick={props.onAddClick} class="btn btn-success">
+          {t('events.add')}
+        </button>
       </div>
     </div>
   );
@@ -101,7 +105,13 @@ class Calendar extends Component {
     return (
       <Router>
         <CalendarHeader onAddClick={this.openEventModal}/>
-        {isReady ? <FullCalendar events={this.calendarEvents} onEventClick={this.showEvent}/> : <Loading/>}
+        {isReady ?
+          <FullCalendar
+            events={this.calendarEvents}
+            onEventClick={this.showEvent}
+          />
+          : <Loading/>
+        }
         {showEventModal ?
           <EventModal
             data={selectedEvent}

@@ -53,12 +53,20 @@ group :development do
 end
 
 group :test do
+  # Capybara helps you test web applications by simulating how a real user would interact with your app.
+  gem 'capybara'
+  # Database Cleaner is a set of gems containing strategies for cleaning your database in Ruby.
+  gem 'database_cleaner-active_record'
   # Testing framework
   gem 'rspec-rails', '~> 4.0.1'
-  # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that.
-  gem 'shoulda-matchers'
+  # RSpec is a fine unit-testing framework, but is also handy for acceptance and integration tests.
+  gem 'rspec-longrun'
   # Rubocop rspec
   gem 'rubocop-rspec', require: false
+  # Provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that.
+  gem 'shoulda-matchers'
+  # Selenium WebDriver drives a browser natively, as a real user would, either locally or on remote machines.
+  gem 'webdrivers', require: 'webdrivers/chromedriver'
   # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage
   # across test suites
   gem 'simplecov'
