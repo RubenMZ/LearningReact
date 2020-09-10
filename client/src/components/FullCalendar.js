@@ -11,8 +11,6 @@ class FullCalendarComponent extends React.Component {
   constructor(props) {
     super(props)
 
-    // [{ title: 'event 1', date: '2020-09-01', start: ..., end: ...}]
-    this.state = { events: props.events }
     this.handleEventClick = this.handleEventClick.bind(this)
   }
 
@@ -31,7 +29,8 @@ class FullCalendarComponent extends React.Component {
           selectable='true'
           editable='true'
           eventContent={Event}
-          events={this.state.events}
+          events={this.props.events}
+          contentHeight="auto"
         />
       </div>
     )
