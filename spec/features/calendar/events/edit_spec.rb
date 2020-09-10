@@ -15,15 +15,12 @@ RSpec.describe 'Calendar > Events edit', js: true do
 
   it 'updates an event' do
     fill_event_form(attributes)
-
     click_save_event
 
-    wait_for_loading
+    wait_for_event_loading
 
     updated_event = find_event({title: attributes[:title]})
-
-    expect(event.id).to eq(updated_event.id)
-    expect_list_event(event.reload)
+    expect_list_event(updated_event)
   end
 
   context 'when has empty fields' do

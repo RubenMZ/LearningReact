@@ -71,4 +71,9 @@ module EventsHelpers
       expect_disabled_field key, with: value
     end
   end
+
+  def wait_for_event_loading
+    expect(page).to have_no_css event_modal_selector
+    wait_for_loading
+  end
 end

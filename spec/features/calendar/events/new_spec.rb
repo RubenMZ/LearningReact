@@ -15,7 +15,7 @@ RSpec.describe 'Calendar > Events new', js: true do
 
     click_save_event
 
-    wait_for_loading
+    wait_for_event_loading
 
     new_event = find_event({title: attributes[:title]})
 
