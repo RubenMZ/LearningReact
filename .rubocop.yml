@@ -1,0 +1,46 @@
+
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'config/**/*'
+    - 'bin/**/*'
+
+# https://rubocop.readthedocs.io/en/latest/cops_style/#styleblockcomments
+Style/BlockComments:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+Style/ExampleLength:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+Style/BlockLength:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+RSpec/DescribeClass:
+  Exclude:
+    - "**/spec/features/**/*.rb"
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
+Layout/LineLength:
+  Max: 100
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
