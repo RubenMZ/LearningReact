@@ -15,6 +15,7 @@ RSpec.describe 'Calendar > Events delete', js: true do
     expect(page).to have_css event_selector(event)
 
     click_delete_event
+    click_delete_event # Confirm delete event again
 
     expect(page).not_to have_css event_selector(event)
   end
