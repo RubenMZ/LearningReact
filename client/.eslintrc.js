@@ -22,6 +22,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "semi": ["error", "never"]
+        "semi": ["error", "never"],
+        "arrow-parens": ["error", "as-needed"]
     }
 };

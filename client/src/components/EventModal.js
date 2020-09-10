@@ -2,41 +2,43 @@ import React, { Component, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
-import EventModalFooter from './EventModalFooter.js'
 import DatePicker from 'react-datepicker'
-import InputField from './InputField.js'
+import EventModalFooter from './modal-footer/EventModalFooter'
+import InputField from './InputField'
 
-import EventsService from '../services/api/events.js'
+import EventsService from '../services/api/events'
 
 const defaultEvent = {
   title: '',
   start_date: null,
   end_date: null,
-  description: ''
+  description: '',
 }
 
 class EventModal extends Component {
   constructor(props) {
     super(props)
-    const {data, readOnly, onSuccess, onCancel} = props
+    const {
+      data, readOnly, onSuccess, onCancel,
+    } = props
 
     this.state = {
-      data: data || defaultEvent,
+      data: data || defaultEvent,
       errors: {},
       editMode: !!data,
-      readOnly: readOnly || false
+      readOnly: readOnly || false,
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.editEvent = this.editEvent.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.editEvent = this.editEvent.bind(this)
+    this.deleteEvent = this.deleteEvent.bind(this)
     this.onSuccess = onSuccess
     this.onCancel = onCancel
   }
 
   handleChange(event) {
-    const {name, value} = event.target
+    const { name, value } = event.target
     this.changeField(name, value)
   }
 
@@ -45,59 +47,60 @@ class EventModal extends Component {
   }
 
   changeField(name, value) {
-    const {data} = this.state
-    this.setState({data: {...data, [name]: value}})
+    const { data } = this.state
+    this.setState({ data: { ...data, [name]: value } })
   }
 
   async submit() {
-    const {data} = this.state
+    const { data } = this.state
     if (data.id) {
-      return await EventsService.update(data.id, data)
-    } else {
-      return await EventsService.create(data)
+      return EventsService.update(data.id, data)
     }
+    return EventsService.create(data)
   }
 
   async handleSubmit() {
     const response = await this.submit()
-    if(response.data) {
+    if (response.data) {
       this.onSuccess()
-    } else {
+    } else {
       this.setErrors(response.errors)
     }
   }
 
   async deleteEvent() {
-    const {data} = this.state
+    const { data } = this.state
     await EventsService.destroy(data.id)
     this.onSuccess()
   }
 
   editEvent() {
-    this.setState({readOnly: false})
+    this.setState({ readOnly: false })
   }
 
   setErrors(errors) {
-    this.setState({errors})
+    this.setState({ errors })
   }
 
   render() {
     const { t } = this.props
-    const { data, readOnly, editMode, errors } = this.state
+    const {
+      data, readOnly, editMode, errors,
+    } = this.state
 
     return (
-      <div id="event-modal" class="modal" style={{display: 'block'}}>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">
+      <div id="event-modal" className="modal" style={{ display: 'block' }}>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">
                 { editMode ? t('events.modal.edit') : t('events.modal.new')}
               </h5>
-              <button class="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
+              <button className="close" data-dismiss="modal" aria-label="Close" onClick={this.onCancel}>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
             <form onSubmit={this.handleSubmit}>
               <InputField label={t('events.form.title')} errors={errors.title}>
                 <input
@@ -159,10 +162,11 @@ class EventModal extends Component {
 }
 
 EventModal.propTypes = {
+  t: PropTypes.func,
   data: PropTypes.object,
   readOnly: PropTypes.bool,
   onSuccess: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
 }
 
 const MyComponent = withTranslation()(EventModal)

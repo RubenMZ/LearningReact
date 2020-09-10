@@ -30,7 +30,7 @@ jobs:
       run: |
         cd client
         yarn add eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react
-        yarn eslint "src/**/*.js"
+        yarn lint
 
   features:
     runs-on: ubuntu-latest

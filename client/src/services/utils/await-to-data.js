@@ -5,7 +5,7 @@ export default async promise => {
   try {
     return await promise
   } catch (error) {
-    if(error.response) { return error.response.data }
+    if (error.response) { return error.response.data }
     throw error
   }
 }

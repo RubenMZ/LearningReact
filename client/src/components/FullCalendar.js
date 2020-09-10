@@ -1,15 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
-import Event from './Event.js'
+import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
-export default class FullCalendarComponent extends React.Component {
+import Event from './Event'
+
+class FullCalendarComponent extends React.Component {
   constructor(props) {
     super(props)
 
     // [{ title: 'event 1', date: '2020-09-01', start: ..., end: ...}]
-    this.state = {events: props.events}
+    this.state = { events: props.events }
     this.handleEventClick = this.handleEventClick.bind(this)
   }
 
@@ -19,10 +22,10 @@ export default class FullCalendarComponent extends React.Component {
 
   render() {
     return (
-      <div class='calendar p-3'>
+      <div className='calendar p-3'>
         <FullCalendar
           timeZone='UTC'
-          plugins={[ dayGridPlugin, interactionPlugin ]}
+          plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           eventClick={this.handleEventClick}
           selectable='true'
@@ -34,3 +37,10 @@ export default class FullCalendarComponent extends React.Component {
     )
   }
 }
+
+FullCalendarComponent.propTypes = {
+  events: PropTypes.array.isRequired,
+  onEventClick: PropTypes.func.isRequired,
+}
+
+export default FullCalendarComponent

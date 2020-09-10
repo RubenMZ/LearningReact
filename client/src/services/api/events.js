@@ -1,14 +1,13 @@
-import API from './index.js'
-import awaitToData from '../utils/await-to-data.js'
-
+import API from './index'
+import awaitToData from '../utils/await-to-data'
 
 export default {
   getBaseResource(urlSegment = '') {
     const BASE_RESOURCE = 'events'
-    return BASE_RESOURCE + `/${urlSegment}`
+    return `${BASE_RESOURCE}/${urlSegment}`
   },
 
-  index(params = {}) {
+  index(params = {}) {
     return awaitToData(API.get(this.getBaseResource(), params))
   },
 
@@ -17,14 +16,14 @@ export default {
   },
 
   create(data) {
-    return awaitToData(API.post(this.getBaseResource(), {data}))
+    return awaitToData(API.post(this.getBaseResource(), { data }))
   },
 
   update(id, data) {
-    return awaitToData(API.put(this.getBaseResource(id), {data}))
+    return awaitToData(API.put(this.getBaseResource(id), { data }))
   },
 
   destroy(id) {
     return awaitToData(API.delete(this.getBaseResource(id)))
-  }
+  },
 }

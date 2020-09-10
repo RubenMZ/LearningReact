@@ -1,12 +1,12 @@
-import { Switch, Route, Redirect } from "react-router-dom"
+import { Switch, Route, Redirect } from 'react-router-dom'
 import React from 'react'
 
-import Calendar from '../pages/Calendar.js'
+import Calendar from '../pages/calendar/Calendar'
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" render={() => {return (<Redirect to="/calendar" />)}}/>
+      <Route exact path="/" render={() => (<Redirect to="/calendar" />)}/>
       <Route path="/calendar">
         <Calendar/>
       </Route>

@@ -1,9 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import DefaultLayout from './layouts/DefaultLayout.js'
+import DefaultLayout from './layouts/DefaultLayout'
 
-import Routes from './router/Routes.js'
+import Routes from './router/Routes'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <DefaultLayout></DefaultLayout>
       <Routes/>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
