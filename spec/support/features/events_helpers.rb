@@ -32,6 +32,7 @@ module EventsHelpers
   end
 
   def click_show_event(event)
+    expect(page).to have_css event_selector(event)
     first(event_selector(event)).click
   end
 
