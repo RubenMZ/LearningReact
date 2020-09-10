@@ -19,4 +19,10 @@ RSpec.describe Event, type: :model do
     it { is_expected.to have_db_column(:start_date).of_type(:datetime) }
     it { is_expected.to have_db_column(:end_date).of_type(:datetime) }
   end
+
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:start_date) }
+    it { is_expected.to validate_presence_of(:end_date) }
+  end
 end
