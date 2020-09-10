@@ -12,6 +12,10 @@ module FeaturesHelpers
     expect(page).to have_css '.text-danger', text: text, count: count
   end
 
+  def expect_disabled_field(name, with:)
+    expect(page).to have_field name, with: with, disabled: true
+  end
+
   def formatted_date(date)
     date.strftime('%m/%d/%Y')
   end

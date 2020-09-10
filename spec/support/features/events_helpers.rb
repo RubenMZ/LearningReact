@@ -60,9 +60,15 @@ module EventsHelpers
   end
 
   def expect_show_event(event)
-    expect(page).to have_field 'title', with: event.title, disabled: true
-    expect(page).to have_field 'startDate', with: formatted_date(event.start_date), disabled: true
-    expect(page).to have_field 'endDate', with: formatted_date(event.end_date), disabled: true
-    expect(page).to have_field 'description', with: event.description, disabled: true
+    fields = {
+      title: event.title,
+      startDate: formatted_date(event.start_date),
+      endDate: formatted_date(event.end_date),
+      description: event.description
+    }
+
+    fields.each do |key, value|
+      expect_disabled_field key, with: value
+    end
   end
 end

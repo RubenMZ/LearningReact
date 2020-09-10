@@ -11,6 +11,18 @@ Style/BlockComments:
   Exclude:
     - "**/spec/**/*.rb"
 
+Style/ExampleLength:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+Style/BlockLength:
+  Exclude:
+    - "**/spec/**/*.rb"
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - "**/spec/**/*.rb"
+
 RSpec/DescribeClass:
   Exclude:
     - "**/spec/features/**/*.rb"

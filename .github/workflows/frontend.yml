@@ -29,8 +29,8 @@ jobs:
     - name: Checking eslint
       run: |
         cd client
-        npm install eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react
-        ./node_modules/.bin/eslint --ignore-pattern "vendor" src
+        yarn add eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react
+        yarn eslint "src/**/*.js"
 
   features:
     runs-on: ubuntu-latest
