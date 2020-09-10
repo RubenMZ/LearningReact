@@ -6,7 +6,7 @@ RSpec.describe 'Calendar > Events new', js: true do
   let(:attributes) { attributes_for :event }
 
   before do
-    visit page_url
+    visit_and_wait page_url
     click_add_event
   end
 

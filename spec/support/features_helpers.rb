@@ -1,5 +1,10 @@
 # Helpers for features
 module FeaturesHelpers
+  def visit_and_wait(page_url)
+    visit page_url
+    wait_for_loading
+  end
+
   def wait_for_loading
     expect(page).to have_no_css '.loading'
   end

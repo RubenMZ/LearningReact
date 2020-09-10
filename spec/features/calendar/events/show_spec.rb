@@ -7,7 +7,7 @@ RSpec.describe 'Calendar > Events show', js: true do
 
   before do
     event
-    visit page_url
+    visit_and_wait page_url
     click_show_event(event)
   end
 
