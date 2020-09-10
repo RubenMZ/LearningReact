@@ -32,6 +32,7 @@ module EventsHelpers
   end
 
   def click_show_event(event)
+    expect(page).to have_css event_selector(event)
     first(event_selector(event)).click
   end
 
@@ -53,6 +54,8 @@ module EventsHelpers
   end
 
   def expect_list_event(event)
+    expect(page).to have_css event_selector(event)
+
     within first(event_selector(event)) do
       expect(page).to have_css('.fc-event-time')
       expect(page).to have_css('.fc-event-title', text: event.title)
