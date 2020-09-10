@@ -46,16 +46,23 @@ module EventsHelpers
     fill_in 'description', with: attributes[:description] if attributes.key?(:description)
   end
 
-  def expect_show_events(events)
+  def expect_list_events(events)
     events.each do |event|
-      expect_show_event(event)
+      expect_list_event(event)
     end
   end
 
-  def expect_show_event(event)
+  def expect_list_event(event)
     within first(event_selector(event)) do
       expect(page).to have_css('.fc-event-time')
       expect(page).to have_css('.fc-event-title', text: event.title)
     end
+  end
+
+  def expect_show_event(event)
+    expect(page).to have_field 'title', with: event.title, disabled: true
+    expect(page).to have_field 'startDate', with: formatted_date(event.start_date), disabled: true
+    expect(page).to have_field 'endDate', with: formatted_date(event.end_date), disabled: true
+    expect(page).to have_field 'description', with: event.description, disabled: true
   end
 end

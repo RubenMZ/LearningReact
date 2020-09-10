@@ -19,7 +19,7 @@ RSpec.describe 'Calendar > Events new', js: true do
 
     new_event = find_event({title: attributes[:title]})
 
-    expect_show_event(new_event)
+    expect_list_event(new_event)
   end
 
   context 'when has empty fields' do
@@ -27,7 +27,7 @@ RSpec.describe 'Calendar > Events new', js: true do
 
     it 'shows errors' do
       within event_modal_selector do
-        expect_show_error text: 'Es requerido', count: 3
+        expect_show_error text: 'Required', count: 3
       end
     end
   end

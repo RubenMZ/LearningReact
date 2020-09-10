@@ -44,7 +44,6 @@ function EventModalFooter(props) {
 }
 
 EventModalFooter.propTypes = {
-  edit: PropTypes.bool,
   readOnly: PropTypes.bool,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

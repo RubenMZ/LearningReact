@@ -29,5 +29,40 @@ jobs:
     - name: Checking eslint
       run: |
         cd client
-        npm install eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-vue
+        npm install eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react
         ./node_modules/.bin/eslint --ignore-pattern "vendor" src
+
+  features:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:12.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 'learning_react_calendar'
+          POSTGRES_DB: 'learning_react_calendar_test'
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.7.1
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.1
+    - name: Build and test with Rake
+      env:
+        DATABASE_URL: postgres://postgres:@localhost:5432/learning_react_calendar_test
+        RAILS_ENV: test
+        # REDIS_URL: redis://localhost:6379/0
+        # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      run: |
+        gem install bundler --no-document
+        bundle install --quiet
+        bundle exec rails db:test:prepare
+        bundle exec rspec --pattern "**/features/**/*_spec.rb"

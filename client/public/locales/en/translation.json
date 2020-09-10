@@ -1,0 +1,32 @@
+{
+  "general": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "accept": "Accept"
+  },
+  "errors": {
+    "blank": "Required",
+    "invalid": "Invalid"
+  },
+  "calendar": {
+    "title": "Calendar"
+  },
+  "events": {
+    "add": "Add event",
+    "modal": {
+      "new": "New event",
+      "edit": "Edit event"
+    },
+    "form": {
+      "title": "Title",
+      "description": "Description",
+      "startDate": "Date from",
+      "endDate": "Date to"
+    },
+    "confirmModal": {
+      "message": "Are you sure?"
+    }
+  }
+}

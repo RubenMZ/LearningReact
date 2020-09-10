@@ -10,12 +10,8 @@ RSpec.describe 'Calendar > Events index', js: true do
     visit page_url
   end
 
-  it 'shows calendar' do
-    expect(page).to have_css('.calendar')
-  end
-
   it 'shows events' do
-    expect_show_events(events)
+    expect_list_events(events)
   end
 
   it 'shows button to add events' do

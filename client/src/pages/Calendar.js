@@ -15,7 +15,7 @@ function CalendarHeader(props) {
   return (
     <div class="btn-toolbar justify-content-between p-3" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
-        <Link to="/" class="btn btn-light">
+        <Link to="/calendar" class="btn btn-light">
           {t('calendar.title')}
         </Link>
       </div>

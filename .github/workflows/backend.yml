@@ -77,4 +77,4 @@ jobs:
         gem install bundler --no-document
         bundle install --quiet
         bundle exec rails db:test:prepare
-        bundle exec rspec
+        bundle exec rspec --exclude-pattern "**/features/**/*_spec.rb"

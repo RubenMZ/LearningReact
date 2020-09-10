@@ -2,15 +2,15 @@
 
 Calendar using Rails + React
 
-## Requirements
+# Requirements
 
 - Ruby MRI 2.7.1
 - Rails 6.0.3.2
 - Postgresql 12.2
 
-## Installation
+# Installation
 
-### Configuration
+## Configuration
 
 1. Install `gem bundler` if it doesn't installed.
 
@@ -24,7 +24,7 @@ $ gem install bundler
 $ bundle install
 ```
 
-### Database creation
+## Database creation
 
 1. Install database postgres.
 

@@ -18,10 +18,12 @@ RSpec.describe 'Calendar > Events edit', js: true do
 
     click_save_event
 
+    wait_for_loading
+
     updated_event = find_event({title: attributes[:title]})
 
     expect(event.id).to eq(updated_event.id)
-    expect_show_event(event.reload)
+    expect_list_event(event.reload)
   end
 
   context 'when has empty fields' do
@@ -32,7 +34,7 @@ RSpec.describe 'Calendar > Events edit', js: true do
 
     it 'shows errors' do
       within event_modal_selector do
-        expect_show_error text: 'Es requerido', count: 1
+        expect_show_error text: 'Required', count: 1
       end
     end
   end

@@ -3,7 +3,8 @@
     "save": "Guardar",
     "cancel": "Cancelar",
     "delete": "Eliminar",
-    "edit": "Editar"
+    "edit": "Editar",
+    "accept": "Aceptar"
   },
   "errors": {
     "blank": "Es requerido",
@@ -23,6 +24,9 @@
       "description": "Descripción",
       "startDate": "Fecha desde",
       "endDate": "Fecha hasta"
+    },
+    "confirmModal": {
+      "message": "¿Estás seguro?"
     }
   }
 }
