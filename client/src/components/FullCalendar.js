@@ -12,16 +12,16 @@ class FullCalendarComponent extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {render: false}
+    this.state = { render: false }
 
     this.handleEventClick = this.handleEventClick.bind(this)
   }
 
   componentDidMount() {
     // Wait for render to fix full-calendar loading issue
-    setTimeout(function() {
-      this.setState({render: true})
-    }.bind(this), 500)
+    setTimeout(() => {
+      this.setState({ render: true })
+    }, 500)
   }
 
   handleEventClick(arg) {
