@@ -12,7 +12,16 @@ class FullCalendarComponent extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {render: false}
+
     this.handleEventClick = this.handleEventClick.bind(this)
+  }
+
+  componentDidMount() {
+    // Wait for render to fix full-calendar loading issue
+    setTimeout(function() {
+      this.setState({render: true})
+    }.bind(this), 500)
   }
 
   handleEventClick(arg) {
@@ -20,22 +29,26 @@ class FullCalendarComponent extends React.Component {
   }
 
   render() {
+    let calendar
+    if (this.state.render) {
+      calendar = <FullCalendar
+        timeZone='UTC'
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        eventClick={this.handleEventClick}
+        selectable={true}
+        editable={true}
+        selectMirror={true}
+        dayMaxEvents={true}
+        eventContent={Event}
+        initialEvents={this.props.events}
+        events={this.props.events}
+        contentHeight="auto"
+      />
+    }
     return (
       <div className='calendar p-3'>
-        <FullCalendar
-          timeZone='UTC'
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          eventClick={this.handleEventClick}
-          selectable={true}
-          editable={true}
-          selectMirror={true}
-          dayMaxEvents={true}
-          eventContent={Event}
-          initialEvents={this.props.events}
-          events={this.props.events}
-          contentHeight="auto"
-        />
+        {calendar}
       </div>
     )
   }
