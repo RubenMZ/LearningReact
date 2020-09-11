@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
 import Event from './Event'
@@ -23,12 +24,15 @@ class FullCalendarComponent extends React.Component {
       <div className='calendar p-3'>
         <FullCalendar
           timeZone='UTC'
-          plugins={[dayGridPlugin, interactionPlugin]}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           eventClick={this.handleEventClick}
-          selectable='true'
-          editable='true'
+          selectable={true}
+          editable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
           eventContent={Event}
+          initialEvents={this.props.events}
           events={this.props.events}
           contentHeight="auto"
         />
