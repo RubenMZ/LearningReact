@@ -41,7 +41,6 @@ class FullCalendarComponent extends React.Component {
         selectMirror={true}
         dayMaxEvents={true}
         eventContent={Event}
-        initialEvents={this.props.events}
         events={this.props.events}
         contentHeight="auto"
       />
